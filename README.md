@@ -28,6 +28,15 @@ path.join(__dirname, '../', 'views', 'add-product.html')
 // Final path: /Users/.../views/add-product.html
 ```
 
+**Why `'../'` is needed in some files but not others:**
+
+| File Location | `__dirname` Points To | Path Construction | Need `'../'`? |
+|---------------|----------------------|-------------------|---------------|
+| `app.js` (root) | `/project/` | `path.join(__dirname, 'views', '404.html')` | No - already at root |
+| `routes/admin.js` | `/project/routes/` | `path.join(__dirname, '../', 'views', 'file.html')` | Yes - need to go up |
+
+**Key Point:** `__dirname` always refers to the **current file's directory**, not the project root.
+
 ### 3. Serving Static HTML Files
 ```javascript
 res.sendFile(absolutePath)  // Must use absolute path
